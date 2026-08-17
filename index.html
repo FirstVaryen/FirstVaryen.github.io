@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hillary — Data & Analytics Portfolio</title>
+<style>
+  :root {
+    --bg: #0d1117;
+    --card: #161b22;
+    --border: #30363d;
+    --text: #c9d1d9;
+    --muted: #8b949e;
+    --accent: #58a6ff;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    padding: 48px 20px;
+  }
+  .wrap {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  header {
+    margin-bottom: 40px;
+  }
+  h1 {
+    font-size: 1.9rem;
+    margin: 0 0 8px 0;
+    color: #fff;
+  }
+  header p {
+    color: var(--muted);
+    margin: 0;
+    font-size: 1.05rem;
+  }
+  .project {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 24px;
+    margin-bottom: 20px;
+    transition: border-color 0.15s ease;
+  }
+  .project:hover {
+    border-color: var(--accent);
+  }
+  .project h2 {
+    margin: 0 0 6px 0;
+    font-size: 1.25rem;
+  }
+  .project h2 a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+  .project h2 a:hover {
+    text-decoration: underline;
+  }
+  .project .tag {
+    display: inline-block;
+    font-size: 0.72rem;
+    color: var(--muted);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 2px 10px;
+    margin-bottom: 12px;
+  }
+  .project p {
+    color: var(--text);
+    margin: 0 0 14px 0;
+    font-size: 0.95rem;
+  }
+  .project a.view {
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+  .project a.view:hover {
+    text-decoration: underline;
+  }
+  footer {
+    margin-top: 40px;
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+  footer a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <h1>Hillary — Data & Analytics Portfolio</h1>
+    <p>A short selection of data analytics and BI work.</p>
+  </header>
+
+  <div class="project">
+    <span class="tag">Power BI · Dashboard</span>
+    <h2><a href="https://github.com/FirstVaryen/global-superstore-bi-dashboard" target="_blank">Global Superstore BI Dashboard</a></h2>
+    <p>An executive Power BI dashboard built for a national retail company, covering sales, profit, and performance metrics across regions and product lines. Built as part of the AnalystLab Africa internship (Week 2).</p>
+    <a class="view" href="https://github.com/FirstVaryen/global-superstore-bi-dashboard" target="_blank">View project →</a>
+  </div>
+
+  <div class="project">
+    <span class="tag">Python · Jupyter Notebook</span>
+    <h2><a href="https://github.com/FirstVaryen/telco-customer-churn-analysis" target="_blank">Telco Customer Churn Analysis</a></h2>
+    <p>A business analytics case study analyzing customer churn patterns in a telecom dataset — identifying key drivers of churn and recommending retention strategies. Built as part of the AnalystLab Africa internship (Week 1).</p>
+    <a class="view" href="https://github.com/FirstVaryen/telco-customer-churn-analysis" target="_blank">View project →</a>
+  </div>
+
+  <footer>
+    More projects on <a href="https://github.com/FirstVaryen" target="_blank">GitHub</a>.
+  </footer>
+
+</div>
+</body>
+</html>
