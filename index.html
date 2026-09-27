@@ -58,21 +58,31 @@
   .group{
     border:1px solid var(--line);
     border-radius:10px;
-    padding:20px 20px 8px;
     margin-bottom:20px;
     background:var(--bg-raised);
+    overflow:hidden;
   }
-  .group-label{
-    font-size:13px;color:var(--ink-dim);margin:0 0 16px;
-    display:flex;align-items:center;gap:8px;
+  .group summary{
+    list-style:none;cursor:pointer;user-select:none;
+    padding:16px 20px;
+    font-size:14.5px;color:var(--ink-dim);
+    display:flex;align-items:center;gap:10px;
   }
-  .group-label::before{content:"";width:16px;height:12px;border:1px solid var(--ink-dim);border-top:none;border-radius:0 0 2px 2px;opacity:.6;}
+  .group summary::-webkit-details-marker{display:none;}
+  .group summary .chev{
+    width:8px;height:8px;border-right:1.5px solid var(--ink-dim);border-bottom:1.5px solid var(--ink-dim);
+    transform:rotate(-45deg);transition:transform .15s;flex-shrink:0;
+  }
+  .group[open] summary .chev{transform:rotate(45deg);}
+  .group summary strong{color:var(--ink);font-weight:600;}
+  .group summary .count{color:var(--ink-dim);}
+  .group-body{padding:0 20px 8px;}
 
   .card{
     border-top:1px solid var(--line);
     padding:18px 0;
   }
-  .group .card:first-of-type{border-top:none;padding-top:0;}
+  .group-body .card:first-of-type{border-top:none;padding-top:0;}
   .card-flat{
     border:1px solid var(--line);
     border-radius:10px;
@@ -161,10 +171,10 @@ function render(){
     html += `<section class="category" data-cat="data">
       <div class="cat-head"><span class="dot data"></span><h2>Data Analysis</h2></div>`;
     if (analystlab.length){
-      html += `<div class="group">
-        <p class="group-label">AnalystLab Africa internship</p>
-        ${analystlab.map(r => card(r, false)).join('')}
-      </div>`;
+      html += `<details class="group">
+        <summary><span class="chev"></span> <strong>AnalystLab Africa internship</strong> <span class="count">(${analystlab.length} projects)</span></summary>
+        <div class="group-body">${analystlab.map(r => card(r, false)).join('')}</div>
+      </details>`;
     }
     html += otherData.map(r => card(r, false)).join('');
     html += `</section>`;
