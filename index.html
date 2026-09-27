@@ -3,124 +3,215 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hillary — Data & Analytics Portfolio</title>
+<title>Hillary Emmanuel — Data & Analytics Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --bg: #0d1117;
-    --card: #161b22;
-    --border: #30363d;
-    --text: #c9d1d9;
-    --muted: #8b949e;
-    --accent: #58a6ff;
+  :root{
+    --bg:#15171c;
+    --bg-raised:#1c1f26;
+    --line:#2b2f38;
+    --ink:#eceef2;
+    --ink-dim:#9aa1ad;
+    --data:#5b9dd9;
+    --data-dim:#3a4a5c;
+    --sf:#e0a94c;
+    --sf-dim:#5c4e33;
   }
-  * { box-sizing: border-box; }
-  body {
-    margin: 0;
-    background: var(--bg);
-    color: var(--text);
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-    line-height: 1.6;
-    padding: 48px 20px;
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    line-height:1.55;
   }
-  .wrap {
-    max-width: 720px;
-    margin: 0 auto;
+  .wrap{max-width:880px;margin:0 auto;padding:64px 24px 96px;}
+  h1{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:clamp(32px,5vw,44px);
+    margin:0 0 12px;
+    letter-spacing:-0.01em;
   }
-  header {
-    margin-bottom: 40px;
+  .lede{color:var(--ink-dim);font-size:17px;margin:0 0 40px;max-width:52ch;}
+  .filters{display:flex;gap:8px;margin-bottom:48px;flex-wrap:wrap;}
+  .filter-btn{
+    background:none;border:1px solid var(--line);color:var(--ink-dim);
+    padding:8px 16px;border-radius:100px;font-family:'Inter',sans-serif;
+    font-size:14px;cursor:pointer;transition:border-color .15s, color .15s;
   }
-  h1 {
-    font-size: 1.9rem;
-    margin: 0 0 8px 0;
-    color: #fff;
+  .filter-btn:hover{color:var(--ink);}
+  .filter-btn.active[data-cat="data"]{border-color:var(--data);color:var(--data);}
+  .filter-btn.active[data-cat="salesforce"]{border-color:var(--sf);color:var(--sf);}
+  .filter-btn.active[data-cat="all"]{border-color:var(--ink);color:var(--ink);}
+
+  section.category{margin-bottom:56px;}
+  section.category[hidden]{display:none;}
+  .cat-head{display:flex;align-items:baseline;gap:10px;margin-bottom:20px;}
+  .cat-head h2{font-family:'Fraunces',serif;font-weight:500;font-size:22px;margin:0;}
+  .cat-head .dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;}
+  .dot.data{background:var(--data);}
+  .dot.sf{background:var(--sf);}
+
+  .group{
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:20px 20px 8px;
+    margin-bottom:20px;
+    background:var(--bg-raised);
   }
-  header p {
-    color: var(--muted);
-    margin: 0;
-    font-size: 1.05rem;
+  .group-label{
+    font-size:13px;color:var(--ink-dim);margin:0 0 16px;
+    display:flex;align-items:center;gap:8px;
   }
-  .project {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 24px;
-    margin-bottom: 20px;
-    transition: border-color 0.15s ease;
+  .group-label::before{content:"";width:16px;height:12px;border:1px solid var(--ink-dim);border-top:none;border-radius:0 0 2px 2px;opacity:.6;}
+
+  .card{
+    border-top:1px solid var(--line);
+    padding:18px 0;
   }
-  .project:hover {
-    border-color: var(--accent);
+  .group .card:first-of-type{border-top:none;padding-top:0;}
+  .card-flat{
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:20px;
+    margin-bottom:14px;
+    background:var(--bg-raised);
   }
-  .project h2 {
-    margin: 0 0 6px 0;
-    font-size: 1.25rem;
+  .card h3, .card-flat h3{
+    font-family:'Inter',sans-serif;font-weight:600;font-size:16px;margin:0 0 6px;
   }
-  .project h2 a {
-    color: var(--accent);
-    text-decoration: none;
+  .card h3 a, .card-flat h3 a{color:var(--ink);text-decoration:none;}
+  .card h3 a:hover, .card-flat h3 a:hover{color:var(--data);}
+  .card p, .card-flat p{color:var(--ink-dim);font-size:14.5px;margin:0 0 10px;}
+  .tags{display:flex;gap:6px;flex-wrap:wrap;}
+  .tag{
+    font-size:12px;color:var(--ink-dim);border:1px solid var(--line);
+    padding:2px 9px;border-radius:100px;
   }
-  .project h2 a:hover {
-    text-decoration: underline;
+  .repo-link{
+    font-size:13.5px;color:var(--data);text-decoration:none;
   }
-  .project .tag {
-    display: inline-block;
-    font-size: 0.72rem;
-    color: var(--muted);
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    padding: 2px 10px;
-    margin-bottom: 12px;
-  }
-  .project p {
-    color: var(--text);
-    margin: 0 0 14px 0;
-    font-size: 0.95rem;
-  }
-  .project a.view {
-    color: var(--accent);
-    text-decoration: none;
-    font-size: 0.9rem;
-    font-weight: 600;
-  }
-  .project a.view:hover {
-    text-decoration: underline;
-  }
-  footer {
-    margin-top: 40px;
-    color: var(--muted);
-    font-size: 0.85rem;
-  }
-  footer a {
-    color: var(--accent);
-    text-decoration: none;
-  }
+  .card-flat .repo-link{color:var(--sf);}
+  .repo-link:hover{text-decoration:underline;}
+
+  .state{color:var(--ink-dim);font-size:14.5px;padding:20px 0;}
+  footer{margin-top:64px;color:var(--ink-dim);font-size:14px;border-top:1px solid var(--line);padding-top:24px;}
+  footer a{color:var(--ink-dim);}
 </style>
 </head>
 <body>
 <div class="wrap">
+  <h1>Hillary Emmanuel</h1>
+  <p class="lede">Data analytics and Salesforce work — dashboards, KPI models, and declarative CRM builds, drawn live from what's actually shipped.</p>
 
-  <header>
-    <h1>Hillary — Data & Analytics Portfolio</h1>
-    <p>A short selection of data analytics and BI work.</p>
-  </header>
-
-  <div class="project">
-    <span class="tag">Power BI · Dashboard</span>
-    <h2><a href="https://github.com/FirstVaryen/global-superstore-bi-dashboard" target="_blank">Global Superstore BI Dashboard</a></h2>
-    <p>An executive Power BI dashboard built for a national retail company, covering sales, profit, and performance metrics across regions and product lines. Built as part of the AnalystLab Africa internship (Week 2).</p>
-    <a class="view" href="https://github.com/FirstVaryen/global-superstore-bi-dashboard" target="_blank">View project →</a>
+  <div class="filters">
+    <button class="filter-btn active" data-cat="all">All</button>
+    <button class="filter-btn" data-cat="data">Data Analysis</button>
+    <button class="filter-btn" data-cat="salesforce">Salesforce</button>
   </div>
 
-  <div class="project">
-    <span class="tag">Python · Jupyter Notebook</span>
-    <h2><a href="https://github.com/FirstVaryen/telco-customer-churn-analysis" target="_blank">Telco Customer Churn Analysis</a></h2>
-    <p>A business analytics case study analyzing customer churn patterns in a telecom dataset — identifying key drivers of churn and recommending retention strategies. Built as part of the AnalystLab Africa internship (Week 1).</p>
-    <a class="view" href="https://github.com/FirstVaryen/telco-customer-churn-analysis" target="_blank">View project →</a>
+  <div id="content">
+    <p class="state">Loading projects…</p>
   </div>
 
   <footer>
-    More projects on <a href="https://github.com/FirstVaryen" target="_blank">GitHub</a>.
+    Projects are pulled live from <a href="https://github.com/FirstVaryen" target="_blank" rel="noopener">github.com/FirstVaryen</a>,
+    tagged <code>portfolio</code> and sorted into Data Analysis / Salesforce by topic.
   </footer>
-
 </div>
+
+<script>
+const USER = "FirstVaryen";
+const state = { data: [], salesforce: [] };
+
+function humanize(name){
+  return name
+    .replace(/[-_]+/g, ' ')
+    .replace(/\s*\.+\s*/g, ' ')
+    .trim();
+}
+
+function card(repo, flatStyle){
+  const desc = repo.description ? repo.description : humanize(repo.name);
+  const tags = (repo.topics || [])
+    .filter(t => !['portfolio','analystlab'].includes(t))
+    .concat(repo.language ? [repo.language] : []);
+  const cls = flatStyle ? 'card-flat' : 'card';
+  return `
+    <div class="${cls}">
+      <h3><a href="${repo.html_url}" target="_blank" rel="noopener">${humanize(repo.name)}</a></h3>
+      <p>${desc}</p>
+      <div class="tags">${tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>
+      <p style="margin-top:10px;"><a class="repo-link" href="${repo.html_url}" target="_blank" rel="noopener">View repository</a></p>
+    </div>`;
+}
+
+function render(){
+  const el = document.getElementById('content');
+  const analystlab = state.data.filter(r => (r.topics||[]).includes('analystlab'))
+                              .sort((a,b) => new Date(a.created_at) - new Date(b.created_at));
+  const otherData = state.data.filter(r => !(r.topics||[]).includes('analystlab'));
+
+  let html = '';
+
+  if (state.data.length){
+    html += `<section class="category" data-cat="data">
+      <div class="cat-head"><span class="dot data"></span><h2>Data Analysis</h2></div>`;
+    if (analystlab.length){
+      html += `<div class="group">
+        <p class="group-label">AnalystLab Africa internship</p>
+        ${analystlab.map(r => card(r, false)).join('')}
+      </div>`;
+    }
+    html += otherData.map(r => card(r, false)).join('');
+    html += `</section>`;
+  }
+
+  if (state.salesforce.length){
+    html += `<section class="category" data-cat="salesforce">
+      <div class="cat-head"><span class="dot sf"></span><h2>Salesforce</h2></div>
+      ${state.salesforce.map(r => card(r, true)).join('')}
+    </section>`;
+  }
+
+  if (!state.data.length && !state.salesforce.length){
+    html = `<p class="state">No repos tagged <code>portfolio</code> yet — add the topic tag on GitHub and refresh.</p>`;
+  }
+
+  el.innerHTML = html;
+}
+
+function applyFilter(cat){
+  document.querySelectorAll('section.category').forEach(sec => {
+    sec.hidden = cat !== 'all' && sec.dataset.cat !== cat;
+  });
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.toggle('active', b.dataset.cat === cat));
+}
+
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => applyFilter(btn.dataset.cat));
+});
+
+fetch(`https://api.github.com/users/${USER}/repos?per_page=100`, {
+  headers: { 'Accept': 'application/vnd.github+json' }
+})
+  .then(res => {
+    if (!res.ok) throw new Error('GitHub API error ' + res.status);
+    return res.json();
+  })
+  .then(repos => {
+    const tagged = repos.filter(r => (r.topics || []).includes('portfolio'));
+    state.data = tagged.filter(r => (r.topics || []).includes('data-analysis'));
+    state.salesforce = tagged.filter(r => (r.topics || []).includes('salesforce'));
+    render();
+  })
+  .catch(err => {
+    document.getElementById('content').innerHTML =
+      `<p class="state">Couldn't load projects right now (${err.message}). Refresh, or check them directly on <a class="repo-link" href="https://github.com/${USER}" target="_blank" rel="noopener">GitHub</a>.</p>`;
+  });
+</script>
 </body>
 </html>
