@@ -3,195 +3,511 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hillary Emmanuel — Data & Analytics Portfolio</title>
+<title>Hillary Emmanuel — Salesforce & Data Analytics Portfolio</title>
+<meta name="description" content="Hillary Emmanuel: Salesforce developer and business analyst, and data analyst. Projects, skills, experience and contact.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
     --bg:#15171c;
     --bg-raised:#1c1f26;
+    --bg-high:#232731;
     --line:#2b2f38;
     --ink:#eceef2;
     --ink-dim:#9aa1ad;
     --data:#5b9dd9;
-    --data-dim:#3a4a5c;
+    --data-dim:#22303f;
     --sf:#e0a94c;
-    --sf-dim:#5c4e33;
+    --sf-dim:#3a3122;
+    --nav-h:64px;
   }
   *{box-sizing:border-box;}
-  body{
-    margin:0;
-    background:var(--bg);
-    color:var(--ink);
-    font-family:'Inter',sans-serif;
-    line-height:1.55;
-  }
-  .wrap{max-width:880px;margin:0 auto;padding:64px 24px 96px;}
-  h1{
-    font-family:'Fraunces',serif;
-    font-weight:600;
-    font-size:clamp(32px,5vw,44px);
-    margin:0 0 12px;
-    letter-spacing:-0.01em;
-  }
-  .lede{color:var(--ink-dim);font-size:17px;margin:0 0 40px;max-width:52ch;}
-  .filters{display:flex;gap:8px;margin-bottom:48px;flex-wrap:wrap;}
-  .filter-btn{
-    background:none;border:1px solid var(--line);color:var(--ink-dim);
-    padding:8px 16px;border-radius:100px;font-family:'Inter',sans-serif;
-    font-size:14px;cursor:pointer;transition:border-color .15s, color .15s;
-  }
+  html{scroll-behavior:smooth;scroll-padding-top:calc(var(--nav-h) + 16px);}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:'Inter',sans-serif;line-height:1.6;}
+  a{color:inherit;}
+  .wrap{max-width:960px;margin:0 auto;padding:0 24px;}
+
+  /* reading progress */
+  #progress{position:fixed;top:0;left:0;height:3px;width:0;z-index:60;
+    background:linear-gradient(90deg,var(--data),var(--sf));}
+
+  /* top navigation */
+  .nav{position:sticky;top:0;z-index:50;height:var(--nav-h);
+    background:rgba(21,23,28,.82);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+    border-bottom:1px solid transparent;transition:border-color .2s;}
+  .nav.scrolled{border-bottom-color:var(--line);}
+  .nav .wrap{height:100%;display:flex;align-items:center;justify-content:space-between;gap:16px;}
+  .brand{font-family:'Fraunces',serif;font-weight:600;font-size:19px;text-decoration:none;letter-spacing:-.01em;}
+  .brand span{color:var(--sf);}
+  .nav-links{display:flex;gap:4px;list-style:none;margin:0;padding:0;}
+  .nav-links a{display:block;padding:8px 12px;border-radius:100px;font-size:14px;color:var(--ink-dim);
+    text-decoration:none;transition:color .15s,background .15s;}
+  .nav-links a:hover{color:var(--ink);}
+  .nav-links a.active{color:var(--ink);background:var(--bg-high);}
+  .menu-btn{display:none;background:none;border:1px solid var(--line);color:var(--ink);border-radius:8px;
+    width:40px;height:40px;cursor:pointer;font-size:18px;}
+
+  /* hero */
+  .hero{padding:96px 0 72px;}
+  .eyebrow{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--sf);font-weight:600;margin:0 0 18px;}
+  .hero h1{font-family:'Fraunces',serif;font-weight:700;font-size:clamp(40px,7vw,72px);line-height:1.05;
+    margin:0 0 20px;letter-spacing:-.02em;}
+  .hero h1 .accent{background:linear-gradient(90deg,var(--data),var(--sf));-webkit-background-clip:text;
+    background-clip:text;color:transparent;}
+  .hero .tagline{display:inline-block;background:var(--bg-high);border:1px solid var(--line);border-radius:10px;
+    padding:8px 14px;font-weight:600;font-size:15px;margin:0 0 24px;}
+  .hero .lede{color:var(--ink-dim);font-size:18px;max-width:60ch;margin:0 0 36px;}
+  .cta{display:flex;gap:12px;flex-wrap:wrap;}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:100px;font-weight:600;
+    font-size:15px;text-decoration:none;transition:transform .15s,background .15s,border-color .15s;}
+  .btn:hover{transform:translateY(-2px);}
+  .btn.primary{background:var(--sf);color:#1b1608;}
+  .btn.ghost{border:1px solid var(--line);color:var(--ink);}
+  .btn.ghost:hover{border-color:var(--ink-dim);}
+
+  /* explore grid (quick links to every section) */
+  .explore{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:0 0 24px;}
+  .explore a{display:flex;flex-direction:column;gap:6px;padding:16px;border:1px solid var(--line);border-radius:12px;
+    background:var(--bg-raised);text-decoration:none;transition:border-color .2s,transform .2s,background .2s;}
+  .explore a:hover{border-color:var(--sf);transform:translateY(-3px);background:var(--bg-high);}
+  .explore .num{font-size:12px;color:var(--sf);font-weight:600;letter-spacing:.08em;}
+  .explore .label{font-weight:600;font-size:15px;}
+  .explore .hint{font-size:13px;color:var(--ink-dim);}
+
+  /* sections */
+  section.block{padding:88px 0;border-top:1px solid var(--line);}
+  .sec-head{margin-bottom:36px;}
+  .sec-head .num{font-size:13px;color:var(--sf);font-weight:600;letter-spacing:.12em;}
+  .sec-head h2{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(28px,4vw,38px);margin:6px 0 10px;letter-spacing:-.01em;}
+  .sec-head p{color:var(--ink-dim);margin:0;max-width:62ch;}
+
+  /* about */
+  .about-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:40px;align-items:start;}
+  .about-grid p{margin:0 0 16px;color:#cfd3da;font-size:16.5px;}
+  .facts{border:1px solid var(--line);border-radius:14px;background:var(--bg-raised);padding:22px;}
+  .fact{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-top:1px solid var(--line);font-size:14.5px;}
+  .fact:first-child{border-top:none;padding-top:0;}
+  .fact span:first-child{color:var(--ink-dim);}
+  .fact span:last-child{text-align:right;font-weight:500;}
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:28px;}
+  .stat{border:1px solid var(--line);border-radius:12px;padding:16px;background:var(--bg-raised);}
+  .stat b{display:block;font-family:'Fraunces',serif;font-size:30px;line-height:1;}
+  .stat span{font-size:13px;color:var(--ink-dim);}
+
+  /* projects (loaded live from GitHub) */
+  .filters{display:flex;gap:8px;margin-bottom:36px;flex-wrap:wrap;}
+  .filter-btn{background:none;border:1px solid var(--line);color:var(--ink-dim);padding:8px 16px;border-radius:100px;
+    font-family:'Inter',sans-serif;font-size:14px;cursor:pointer;transition:border-color .15s,color .15s;}
   .filter-btn:hover{color:var(--ink);}
   .filter-btn.active[data-cat="data"]{border-color:var(--data);color:var(--data);}
   .filter-btn.active[data-cat="salesforce"]{border-color:var(--sf);color:var(--sf);}
   .filter-btn.active[data-cat="all"]{border-color:var(--ink);color:var(--ink);}
-
-  section.category{margin-bottom:56px;}
+  section.category{margin-bottom:48px;}
   section.category[hidden]{display:none;}
-  .cat-head{display:flex;align-items:baseline;gap:10px;margin-bottom:20px;}
-  .cat-head h2{font-family:'Fraunces',serif;font-weight:500;font-size:22px;margin:0;}
-  .cat-head .dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;}
+  .cat-head{display:flex;align-items:center;gap:10px;margin-bottom:18px;}
+  .cat-head h3{font-family:'Fraunces',serif;font-weight:500;font-size:22px;margin:0;}
+  .dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;}
   .dot.data{background:var(--data);}
   .dot.sf{background:var(--sf);}
-
-  .group{
-    border:1px solid var(--line);
-    border-radius:10px;
-    margin-bottom:20px;
-    background:var(--bg-raised);
-    overflow:hidden;
-  }
-  .group summary{
-    list-style:none;cursor:pointer;user-select:none;
-    padding:16px 20px;
-    font-size:14.5px;color:var(--ink-dim);
-    display:flex;align-items:center;gap:10px;
-  }
-  .group summary::-webkit-details-marker{display:none;}
-  .group summary .chev{
-    width:8px;height:8px;border-right:1.5px solid var(--ink-dim);border-bottom:1.5px solid var(--ink-dim);
-    transform:rotate(-45deg);transition:transform .15s;flex-shrink:0;
-  }
-  .group[open] summary .chev{transform:rotate(45deg);}
-  .group summary strong{color:var(--ink);font-weight:600;}
-  .group summary .count{color:var(--ink-dim);}
-  .group-body{padding:0 20px 8px;}
-
-  .card{
-    border-top:1px solid var(--line);
-    padding:18px 0;
-  }
-  .group-body .card:first-of-type{border-top:none;padding-top:0;}
-  .card-flat{
-    border:1px solid var(--line);
-    border-radius:10px;
-    padding:20px;
-    margin-bottom:14px;
-    background:var(--bg-raised);
-  }
-  .card h3, .card-flat h3{
-    font-family:'Inter',sans-serif;font-weight:600;font-size:16px;margin:0 0 6px;
-  }
-  .card h3 a, .card-flat h3 a{color:var(--ink);text-decoration:none;}
-  .card h3 a:hover, .card-flat h3 a:hover{color:var(--data);}
-  .card p, .card-flat p{color:var(--ink-dim);font-size:14.5px;margin:0 0 10px;}
-  .tags{display:flex;gap:6px;flex-wrap:wrap;}
-  .tag{
-    font-size:12px;color:var(--ink-dim);border:1px solid var(--line);
-    padding:2px 9px;border-radius:100px;
-  }
-  .repo-link{
-    font-size:13.5px;color:var(--data);text-decoration:none;
-  }
-  .card-flat .repo-link{color:var(--sf);}
+  .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:14px;}
+  .card{border:1px solid var(--line);border-radius:12px;padding:20px;background:var(--bg-raised);display:flex;flex-direction:column;
+    transition:transform .2s,border-color .2s;}
+  .card:hover{transform:translateY(-4px);}
+  .card.data:hover{border-color:var(--data);}
+  .card.sf:hover{border-color:var(--sf);}
+  .card h4{font-weight:600;font-size:16px;margin:0 0 8px;}
+  .card h4 a{text-decoration:none;}
+  .card p{color:var(--ink-dim);font-size:14.5px;margin:0 0 14px;flex:1;}
+  .tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;}
+  .tag{font-size:12px;color:var(--ink-dim);border:1px solid var(--line);padding:2px 9px;border-radius:100px;}
+  .repo-link{font-size:13.5px;font-weight:600;text-decoration:none;}
+  .card.data .repo-link{color:var(--data);}
+  .card.sf .repo-link{color:var(--sf);}
   .repo-link:hover{text-decoration:underline;}
-
+  .group{border:1px solid var(--line);border-radius:12px;margin-bottom:16px;background:var(--bg-raised);overflow:hidden;}
+  .group summary{list-style:none;cursor:pointer;user-select:none;padding:16px 20px;font-size:14.5px;color:var(--ink-dim);
+    display:flex;align-items:center;gap:10px;}
+  .group summary::-webkit-details-marker{display:none;}
+  .chev{width:8px;height:8px;border-right:1.5px solid var(--ink-dim);border-bottom:1.5px solid var(--ink-dim);
+    transform:rotate(-45deg);transition:transform .15s;flex-shrink:0;}
+  .group[open] .chev{transform:rotate(45deg);}
+  .group summary strong{color:var(--ink);font-weight:600;}
+  .group-body{padding:4px 20px 20px;}
   .state{color:var(--ink-dim);font-size:14.5px;padding:20px 0;}
-  footer{margin-top:64px;color:var(--ink-dim);font-size:14px;border-top:1px solid var(--line);padding-top:24px;}
+
+  /* skills */
+  .skills{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;}
+  .skill-box{border:1px solid var(--line);border-radius:14px;padding:22px;background:var(--bg-raised);}
+  .skill-box h3{font-size:15px;margin:0 0 14px;display:flex;align-items:center;gap:10px;}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;}
+  .chip{font-size:13.5px;padding:5px 12px;border-radius:100px;background:var(--bg-high);border:1px solid var(--line);
+    transition:border-color .15s,color .15s;}
+  .skill-box.sf .chip:hover{border-color:var(--sf);color:var(--sf);}
+  .skill-box.data .chip:hover{border-color:var(--data);color:var(--data);}
+  .skill-box.ba .chip:hover{border-color:var(--ink-dim);}
+
+  /* timeline (experience) */
+  .timeline{position:relative;margin-left:8px;padding-left:32px;}
+  .timeline::before{content:"";position:absolute;left:0;top:6px;bottom:6px;width:2px;
+    background:linear-gradient(var(--sf),var(--data));opacity:.5;}
+  .tl-item{position:relative;margin-bottom:36px;}
+  .tl-item:last-child{margin-bottom:0;}
+  .tl-item::before{content:"";position:absolute;left:-39px;top:6px;width:16px;height:16px;border-radius:50%;
+    background:var(--bg);border:3px solid var(--sf);}
+  .tl-item.data::before{border-color:var(--data);}
+  .tl-when{font-size:13px;color:var(--ink-dim);font-weight:500;letter-spacing:.02em;}
+  .tl-item h3{margin:4px 0 2px;font-size:18px;}
+  .tl-org{color:var(--sf);font-weight:500;font-size:14.5px;margin-bottom:10px;}
+  .tl-item.data .tl-org{color:var(--data);}
+  .tl-item ul{margin:0;padding-left:18px;color:#cfd3da;font-size:15px;}
+  .tl-item li{margin-bottom:6px;}
+
+  /* education & certifications */
+  .edu{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;}
+  .edu-card{border:1px solid var(--line);border-radius:14px;padding:22px;background:var(--bg-raised);}
+  .edu-card .kind{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--sf);font-weight:600;}
+  .edu-card h3{margin:8px 0 4px;font-size:17px;}
+  .edu-card p{margin:0;color:var(--ink-dim);font-size:14.5px;}
+
+  .cert-title{font-family:'Fraunces',serif;font-weight:500;font-size:22px;margin:44px 0 16px;}
+  .certs{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;}
+  .cert{display:flex;gap:14px;align-items:flex-start;border:1px solid var(--line);border-radius:12px;padding:16px 18px;
+    background:var(--bg-raised);transition:border-color .2s,transform .2s;}
+  .cert:hover{transform:translateY(-3px);border-color:var(--ink-dim);}
+  .cert.sf:hover{border-color:var(--sf);}
+  .cert.data:hover{border-color:var(--data);}
+  .cert-icon{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;flex-shrink:0;
+    background:var(--bg-high);color:var(--ink-dim);font-size:16px;}
+  .cert.sf .cert-icon{background:var(--sf-dim);color:var(--sf);}
+  .cert.data .cert-icon{background:var(--data-dim);color:var(--data);}
+  .cert h4{margin:0 0 2px;font-size:15px;font-weight:600;}
+  .cert p{margin:0;color:var(--ink-dim);font-size:13.5px;}
+
+  /* contact */
+  .contact-box{border:1px solid var(--line);border-radius:18px;padding:40px;
+    background:radial-gradient(circle at top right,var(--sf-dim),transparent 60%),var(--bg-raised);}
+  .contact-box h2{font-family:'Fraunces',serif;font-size:clamp(26px,4vw,36px);margin:0 0 10px;}
+  .contact-box p{color:var(--ink-dim);margin:0 0 28px;max-width:56ch;}
+  .contact-links{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;}
+  .contact-links a{display:flex;align-items:center;gap:12px;padding:14px 16px;border:1px solid var(--line);border-radius:12px;
+    text-decoration:none;background:var(--bg);transition:border-color .2s,transform .2s;}
+  .contact-links a:hover{border-color:var(--sf);transform:translateY(-2px);}
+  .contact-links svg{width:20px;height:20px;flex-shrink:0;color:var(--sf);}
+  .contact-links small{display:block;color:var(--ink-dim);font-size:12.5px;}
+
+  footer{padding:40px 0 56px;color:var(--ink-dim);font-size:14px;border-top:1px solid var(--line);margin-top:88px;}
+  footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;}
   footer a{color:var(--ink-dim);}
+
+  #to-top{position:fixed;right:20px;bottom:20px;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);
+    background:var(--bg-high);color:var(--ink);font-size:18px;cursor:pointer;opacity:0;pointer-events:none;
+    transition:opacity .2s,transform .2s;z-index:40;}
+  #to-top.show{opacity:1;pointer-events:auto;}
+  #to-top:hover{transform:translateY(-3px);}
+
+  /* scroll reveal */
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease;}
+  .reveal.in{opacity:1;transform:none;}
+  .reveal-stagger > *{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease;}
+  .reveal-stagger.in > *{opacity:1;transform:none;}
+  .reveal-stagger.in > *:nth-child(2){transition-delay:.08s;}
+  .reveal-stagger.in > *:nth-child(3){transition-delay:.16s;}
+  .reveal-stagger.in > *:nth-child(4){transition-delay:.24s;}
+  .reveal-stagger.in > *:nth-child(5){transition-delay:.32s;}
+  .reveal-stagger.in > *:nth-child(6){transition-delay:.4s;}
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    .reveal,.reveal-stagger > *{opacity:1;transform:none;transition:none;}
+    .card:hover,.btn:hover,.explore a:hover{transform:none;}
+  }
+
+  @media (max-width:820px){
+    .menu-btn{display:block;}
+    .nav-links{position:absolute;top:var(--nav-h);left:0;right:0;flex-direction:column;padding:12px 16px 18px;
+      background:var(--bg);border-bottom:1px solid var(--line);display:none;}
+    .nav-links.open{display:flex;}
+    .nav-links a{padding:12px;}
+    .about-grid{grid-template-columns:1fr;}
+    .hero{padding:64px 0 48px;}
+    section.block{padding:64px 0;}
+    .contact-box{padding:28px 20px;}
+  }
+  @media (max-width:480px){
+    .stats{grid-template-columns:1fr;}
+  }
 </style>
 </head>
 <body>
-<div class="wrap">
-  <h1>Hillary Emmanuel</h1>
-  <p class="lede">Data analytics and Salesforce work — dashboards, KPI models, and declarative CRM builds, drawn live from what's actually shipped.</p>
+<div id="progress"></div>
 
-  <div class="filters">
-    <button class="filter-btn active" data-cat="all">All</button>
-    <button class="filter-btn" data-cat="data">Data Analysis</button>
-    <button class="filter-btn" data-cat="salesforce">Salesforce</button>
+<nav class="nav" id="nav">
+  <div class="wrap">
+    <a class="brand" href="#home">Hillary <span>Emmanuel</span></a>
+    <button class="menu-btn" id="menu-btn" aria-label="Open menu" aria-expanded="false">☰</button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#skills">Skills & Tools</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+  <!-- HOME -->
+  <header class="hero wrap" id="home">
+    <p class="eyebrow reveal">Portfolio</p>
+    <h1 class="reveal">Hillary Emmanuel<br><span class="accent">Salesforce & Data Analytics</span></h1>
+    <p class="tagline reveal">Salesforce Certified Administrator &nbsp;|&nbsp; Salesforce Developer & Business Analyst &nbsp;|&nbsp; Data Analyst</p>
+    <p class="lede reveal">I build Salesforce systems that replace spreadsheets and phone calls with one clear process, and I turn data into dashboards and insights people can act on. This portfolio shows the projects I've shipped, the tools I use and where I've done the work.</p>
+    <div class="cta reveal">
+      <a class="btn primary" href="#projects">See my projects →</a>
+      <a class="btn ghost" href="#contact">Get in touch</a>
+    </div>
+  </header>
+
+  <!-- EXPLORE -->
+  <div class="wrap">
+    <div class="explore reveal-stagger" id="explore">
+      <a href="#about"><span class="num">01</span><span class="label">About Me</span><span class="hint">Who I am and how I work</span></a>
+      <a href="#projects"><span class="num">02</span><span class="label">My Projects</span><span class="hint">Salesforce and data builds</span></a>
+      <a href="#skills"><span class="num">03</span><span class="label">Skills & Tools</span><span class="hint">What I build with</span></a>
+      <a href="#experience"><span class="num">04</span><span class="label">Work Experience</span><span class="hint">Programmes and internships</span></a>
+      <a href="#education"><span class="num">05</span><span class="label">Education & Certifications</span><span class="hint">Learning and credentials</span></a>
+      <a href="#contact"><span class="num">06</span><span class="label">Contact</span><span class="hint">Email, GitHub, LinkedIn</span></a>
+    </div>
   </div>
 
-  <div id="content">
-    <p class="state">Loading projects…</p>
-  </div>
+  <!-- ABOUT -->
+  <section class="block wrap" id="about">
+    <div class="sec-head reveal">
+      <span class="num">01 — ABOUT ME</span>
+      <h2>Turning messy processes into clear systems</h2>
+    </div>
+    <div class="about-grid">
+      <div class="reveal">
+        <p>I work where business processes meet data. On the Salesforce side, I take a business from discovery to go-live: I interview the people who do the work, write the requirements and user stories, map how things run today and how they should run, then build it with Flow, Apex and Experience Cloud, test it as every role and deploy it.</p>
+        <p>On the data side, I clean and analyse data with Python and build dashboards in Power BI, so managers can see what's happening and decide what to do next.</p>
+        <p>I care about the details users actually feel: plain wording on screen, the right people seeing the right records, and a system that's been tested as the real user, not just the admin.</p>
+      </div>
+      <div class="facts reveal">
+        <div class="fact"><span>Focus</span><span>Salesforce development & business analysis</span></div>
+        <div class="fact"><span>Also</span><span>Data analysis & BI dashboards</span></div>
+        <div class="fact"><span>Based in</span><span>Nigeria</span></div>
+        <div class="fact"><span>Open to</span><span>Roles, contracts & collaborations</span></div>
+      </div>
+    </div>
+    <div class="stats reveal-stagger">
+      <div class="stat"><b id="project-count" data-count="11">0</b><span>projects on GitHub</span></div>
+      <div class="stat"><b data-count="8">0</b><span>user roles built and tested in one Salesforce system</span></div>
+      <div class="stat"><b data-count="81">0</b><span>flows automating a dealership's processes</span></div>
+    </div>
+  </section>
 
-  <footer>
-    Projects are pulled live from <a href="https://github.com/FirstVaryen" target="_blank" rel="noopener">github.com/FirstVaryen</a>,
-    tagged <code>portfolio</code> and sorted into Data Analysis / Salesforce by topic.
-  </footer>
-</div>
+  <!-- PROJECTS -->
+  <section class="block wrap" id="projects">
+    <div class="sec-head reveal">
+      <span class="num">02 — MY PROJECTS</span>
+      <h2>Things I've built</h2>
+      <p>Loaded live from my GitHub, so new work appears here as soon as it's published.</p>
+    </div>
+    <div class="filters reveal">
+      <button class="filter-btn active" data-cat="all">All</button>
+      <button class="filter-btn" data-cat="salesforce">Salesforce</button>
+      <button class="filter-btn" data-cat="data">Data Analysis</button>
+    </div>
+    <div id="content"><p class="state">Loading projects…</p></div>
+  </section>
+
+  <!-- SKILLS -->
+  <section class="block wrap" id="skills">
+    <div class="sec-head reveal">
+      <span class="num">03 — SKILLS & TOOLS</span>
+      <h2>What I work with</h2>
+    </div>
+    <div class="skills reveal-stagger">
+      <div class="skill-box sf">
+        <h3><span class="dot sf"></span>Salesforce development</h3>
+        <div class="chips"><span class="chip">Salesforce Flow</span><span class="chip">Apex & Triggers</span><span class="chip">Apex Testing</span><span class="chip">SOQL</span><span class="chip">Lightning Web Components</span><span class="chip">Experience Cloud</span><span class="chip">Salesforce CLI</span></div>
+      </div>
+      <div class="skill-box sf">
+        <h3><span class="dot sf"></span>Salesforce administration</h3>
+        <div class="chips"><span class="chip">Data Modeling</span><span class="chip">Security & Sharing</span><span class="chip">Profiles & Permission Sets</span><span class="chip">Approval Processes</span><span class="chip">Lightning App Builder</span><span class="chip">Reports & Dashboards</span><span class="chip">Deployment</span></div>
+      </div>
+      <div class="skill-box ba">
+        <h3><span class="dot" style="background:var(--ink-dim)"></span>Business analysis & delivery</h3>
+        <div class="chips"><span class="chip">Requirements Gathering</span><span class="chip">User Stories</span><span class="chip">Process Mapping</span><span class="chip">ERD Design</span><span class="chip">User Acceptance Testing</span><span class="chip">Technical Documentation</span></div>
+      </div>
+      <div class="skill-box data">
+        <h3><span class="dot data"></span>Data analysis</h3>
+        <div class="chips"><span class="chip">Data Cleaning & Preparation</span><span class="chip">Exploratory Data Analysis</span><span class="chip">Data Visualisation & Reporting</span><span class="chip">SQL Querying</span><span class="chip">Trend & Variance Analysis</span><span class="chip">Business Insight</span></div>
+      </div>
+      <div class="skill-box data">
+        <h3><span class="dot data"></span>Data tools</h3>
+        <div class="chips"><span class="chip">Power BI</span><span class="chip">SQL</span><span class="chip">MySQL Workbench</span><span class="chip">Python</span><span class="chip">Jupyter Notebook</span><span class="chip">Excel</span><span class="chip">Google Sheets</span></div>
+      </div>
+      <div class="skill-box ba">
+        <h3><span class="dot" style="background:var(--ink-dim)"></span>Other tools</h3>
+        <div class="chips"><span class="chip">Git & GitHub</span><span class="chip">VS Code</span><span class="chip">draw.io</span><span class="chip">MS Office</span><span class="chip">JavaScript</span><span class="chip">HTML & CSS</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section class="block wrap" id="experience">
+    <div class="sec-head reveal">
+      <span class="num">04 — WORK EXPERIENCE</span>
+      <h2>Where I've done the work</h2>
+    </div>
+    <div class="timeline">
+      <div class="tl-item reveal">
+        <div class="tl-when">Sep 2026 – Nov 2026</div>
+        <h3>Salesforce Developer & Business Analyst (Capstone)</h3>
+        <div class="tl-org">Africa Ohana – Talent Accelerator Programme 3.0, with DKloud</div>
+        <ul>
+          <li>Built a Salesforce system for AutoDrive Motors, a car dealership, from discovery to go-live, as part of Group 3</li>
+          <li>Wrote the requirements, user stories, process maps, data model and a security matrix for 8 roles</li>
+          <li>Built live stock and car reservation, multi-step discount approvals, instalment plans, customer service and an Experience Cloud website</li>
+          <li>Ran user acceptance testing as each role and deployed to the go-live org</li>
+        </ul>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-when">Aug 2026 – Oct 2026</div>
+        <h3>Salesforce Developer (Developer Sprint)</h3>
+        <div class="tl-org">Africa Ohana × SUG Ibadan</div>
+        <ul>
+          <li>Built a loan management system for Pure Truth Water Factory on Salesforce</li>
+          <li>Built the Lightning Web Component support dashboard for the team's Support Ticket Tracker, with priority filtering and one-click closing</li>
+        </ul>
+      </div>
+      <div class="tl-item data reveal">
+        <div class="tl-when">Aug 2026 – Sep 2026</div>
+        <h3>Data Analyst Intern</h3>
+        <div class="tl-org">AnalystLab Africa</div>
+        <ul>
+          <li>Built an executive Power BI dashboard for a national retailer (Global Superstore)</li>
+          <li>Analysed customer churn for a telecoms company and clinic data for HealthConnect over several weeks, in Python</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION & CERTIFICATIONS -->
+  <section class="block wrap" id="education">
+    <div class="sec-head reveal">
+      <span class="num">05 — EDUCATION & CERTIFICATIONS</span>
+      <h2>Learning and credentials</h2>
+    </div>
+    <div class="edu reveal-stagger">
+      <div class="edu-card"><span class="kind">Education</span><h3>B.Tech, Computer Science</h3><p>Federal University of Technology, Minna · Niger State, Nigeria · 2018</p></div>
+      <div class="edu-card"><span class="kind">Programme</span><h3>Talent Accelerator Programme 3.0</h3><p>Africa Ohana, with DKloud · 2026</p></div>
+      <div class="edu-card"><span class="kind">Programme</span><h3>Salesforce Developer Sprint</h3><p>Africa Ohana × SUG Ibadan · 2026</p></div>
+      <div class="edu-card"><span class="kind">Internship</span><h3>Data Analytics Internship</h3><p>AnalystLab Africa · 2026</p></div>
+    </div>
+    <h3 class="cert-title reveal">Certifications & licences</h3>
+    <div class="certs reveal-stagger">
+      <div class="cert sf"><span class="cert-icon">☁</span><div><h4>Salesforce Certified Platform Administrator</h4><p>Salesforce · Nov 2025</p></div></div>
+      <div class="cert sf"><span class="cert-icon">☁</span><div><h4>Salesforce Certified Platform Foundations</h4><p>Salesforce · Aug 2025</p></div></div>
+      <div class="cert data"><span class="cert-icon">◆</span><div><h4>ALX Certified Python Programmer</h4><p>ALX · Dec 2025</p></div></div>
+      <div class="cert data"><span class="cert-icon">◆</span><div><h4>ALX Certified Data Analyst</h4><p>ALX · Sep 2025</p></div></div>
+      <div class="cert"><span class="cert-icon">◆</span><div><h4>ALX Certified Professional Foundations</h4><p>ALX · Jun 2025</p></div></div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="block wrap" id="contact">
+    <div class="contact-box reveal">
+      <span class="num" style="font-size:13px;color:var(--sf);font-weight:600;letter-spacing:.12em;">06 — CONTACT</span>
+      <h2>Let's work together</h2>
+      <p>Looking for someone to build or improve your Salesforce org, or to make sense of your data? I'd like to hear about it.</p>
+      <div class="contact-links">
+        <a href="mailto:hillaryemmanuel@gmail.com">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+          <span>Email<small>hillaryemmanuel@gmail.com</small></span></a>
+        <a href="https://github.com/FirstVaryen" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.71 1.26 3.37.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.68 0-1.25.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.09 0 4.41-2.7 5.38-5.26 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z"/></svg>
+          <span>GitHub<small>github.com/FirstVaryen</small></span></a>
+        <a href="https://www.linkedin.com/in/hillary-emmanuel-205451135" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z"/></svg>
+          <span>LinkedIn<small>linkedin.com/in/hillary-emmanuel-205451135</small></span></a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year"></span> Hillary Emmanuel</span>
+    <span>Projects load live from <a href="https://github.com/FirstVaryen" target="_blank" rel="noopener">GitHub</a></span>
+  </div>
+</footer>
+
+<button id="to-top" aria-label="Back to top">↑</button>
 
 <script>
 const USER = "FirstVaryen";
 const state = { data: [], salesforce: [] };
 
 function humanize(name){
-  return name
-    .replace(/[-_]+/g, ' ')
-    .replace(/\s*\.+\s*/g, ' ')
-    .trim();
+  return name.replace(/[-_]+/g, ' ').replace(/\s*\.+\s*/g, ' ').trim();
 }
 
-function card(repo, flatStyle){
+function card(repo, kind){
   const desc = repo.description ? repo.description : humanize(repo.name);
   const tags = (repo.topics || [])
-    .filter(t => !['portfolio','analystlab'].includes(t))
+    .filter(t => !['portfolio','analystlab','data-analysis','salesforce'].includes(t))
     .concat(repo.language ? [repo.language] : []);
-  const cls = flatStyle ? 'card-flat' : 'card';
   return `
-    <div class="${cls}">
-      <h3><a href="${repo.html_url}" target="_blank" rel="noopener">${humanize(repo.name)}</a></h3>
+    <div class="card ${kind}">
+      <h4><a href="${repo.html_url}" target="_blank" rel="noopener">${humanize(repo.name)}</a></h4>
       <p>${desc}</p>
       <div class="tags">${tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>
-      <p style="margin-top:10px;"><a class="repo-link" href="${repo.html_url}" target="_blank" rel="noopener">View repository</a></p>
+      <a class="repo-link" href="${repo.html_url}" target="_blank" rel="noopener">View repository →</a>
     </div>`;
 }
 
 function render(){
   const el = document.getElementById('content');
-  const analystlab = state.data.filter(r => (r.topics||[]).includes('analystlab'))
-                              .sort((a,b) => new Date(a.created_at) - new Date(b.created_at));
-  const otherData = state.data.filter(r => !(r.topics||[]).includes('analystlab'));
-
+  const byDate = (a, b) => new Date(a.created_at) - new Date(b.created_at);
+  const analystlab = state.data.filter(r => (r.topics || []).includes('analystlab')).sort(byDate);
+  const otherData = state.data.filter(r => !(r.topics || []).includes('analystlab'));
+  const sf = state.salesforce.slice().sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
   let html = '';
 
-  if (state.data.length){
-    html += `<section class="category" data-cat="data">
-      <div class="cat-head"><span class="dot data"></span><h2>Data Analysis</h2></div>`;
-    if (analystlab.length){
-      html += `<details class="group">
-        <summary><span class="chev"></span> <strong>AnalystLab Africa internship</strong> <span class="count">(${analystlab.length} projects)</span></summary>
-        <div class="group-body">${analystlab.map(r => card(r, false)).join('')}</div>
-      </details>`;
-    }
-    html += otherData.map(r => card(r, false)).join('');
-    html += `</section>`;
-  }
-
-  if (state.salesforce.length){
-    html += `<section class="category" data-cat="salesforce">
-      <div class="cat-head"><span class="dot sf"></span><h2>Salesforce</h2></div>
-      ${state.salesforce.map(r => card(r, true)).join('')}
+  if (sf.length){
+    html += `<section class="category reveal" data-cat="salesforce">
+      <div class="cat-head"><span class="dot sf"></span><h3>Salesforce</h3></div>
+      <div class="cards">${sf.map(r => card(r, 'sf')).join('')}</div>
     </section>`;
   }
-
-  if (!state.data.length && !state.salesforce.length){
-    html = `<p class="state">No repos tagged <code>portfolio</code> yet — add the topic tag on GitHub and refresh.</p>`;
+  if (state.data.length){
+    html += `<section class="category reveal" data-cat="data">
+      <div class="cat-head"><span class="dot data"></span><h3>Data Analysis</h3></div>`;
+    if (otherData.length) html += `<div class="cards" style="margin-bottom:16px">${otherData.map(r => card(r, 'data')).join('')}</div>`;
+    if (analystlab.length){
+      html += `<details class="group">
+        <summary><span class="chev"></span> <strong>AnalystLab Africa internship</strong> <span>(${analystlab.length} projects)</span></summary>
+        <div class="group-body"><div class="cards">${analystlab.map(r => card(r, 'data')).join('')}</div></div>
+      </details>`;
+    }
+    html += `</section>`;
   }
+  if (!html) html = `<p class="state">No projects tagged <code>portfolio</code> yet.</p>`;
 
   el.innerHTML = html;
+  el.querySelectorAll('.reveal').forEach(n => observer.observe(n));
+  const active = document.querySelector('.filter-btn.active');
+  if (active) applyFilter(active.dataset.cat);
+  const count = sf.length + state.data.length;
+  const statEl = document.getElementById('project-count');
+  if (statEl && count){
+    statEl.dataset.count = count;
+    if (statEl.closest('.in')) countUp(statEl);
+  }
 }
 
 function applyFilter(cat){
@@ -200,18 +516,64 @@ function applyFilter(cat){
   });
   document.querySelectorAll('.filter-btn').forEach(b => b.classList.toggle('active', b.dataset.cat === cat));
 }
+document.querySelectorAll('.filter-btn').forEach(btn => btn.addEventListener('click', () => applyFilter(btn.dataset.cat)));
 
-document.querySelectorAll('.filter-btn').forEach(btn => {
-  btn.addEventListener('click', () => applyFilter(btn.dataset.cat));
+/* reveal sections as they scroll into view, and count the stats up */
+function countUp(el){
+  const target = +el.dataset.count;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches){ el.textContent = target; return; }
+  const start = performance.now();
+  const step = now => {
+    const p = Math.min((now - start) / 1200, 1);
+    el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3)));
+    if (p < 1) requestAnimationFrame(step);
+  };
+  requestAnimationFrame(step);
+}
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    e.target.classList.add('in');
+    e.target.querySelectorAll('[data-count]').forEach(countUp);
+    observer.unobserve(e.target);
+  });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal, .reveal-stagger').forEach(n => observer.observe(n));
+
+/* highlight the menu link for the section on screen */
+const links = [...document.querySelectorAll('.nav-links a')];
+const spy = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id));
+  });
+}, { rootMargin: '-45% 0px -50% 0px' });
+document.querySelectorAll('main section[id], header[id]').forEach(s => spy.observe(s));
+
+/* progress bar, nav border and back-to-top button */
+const nav = document.getElementById('nav'), bar = document.getElementById('progress'), toTop = document.getElementById('to-top');
+function onScroll(){
+  const max = document.documentElement.scrollHeight - innerHeight;
+  bar.style.width = (max > 0 ? scrollY / max * 100 : 0) + '%';
+  nav.classList.toggle('scrolled', scrollY > 10);
+  toTop.classList.toggle('show', scrollY > 600);
+}
+addEventListener('scroll', onScroll, { passive: true });
+onScroll();
+toTop.addEventListener('click', () => scrollTo({ top: 0 }));
+
+/* mobile menu */
+const menuBtn = document.getElementById('menu-btn'), navLinks = document.getElementById('nav-links');
+menuBtn.addEventListener('click', () => {
+  const open = navLinks.classList.toggle('open');
+  menuBtn.setAttribute('aria-expanded', open);
 });
+links.forEach(a => a.addEventListener('click', () => { navLinks.classList.remove('open'); menuBtn.setAttribute('aria-expanded', false); }));
 
-fetch(`https://api.github.com/users/${USER}/repos?per_page=100`, {
-  headers: { 'Accept': 'application/vnd.github+json' }
-})
-  .then(res => {
-    if (!res.ok) throw new Error('GitHub API error ' + res.status);
-    return res.json();
-  })
+document.getElementById('year').textContent = new Date().getFullYear();
+
+fetch(`https://api.github.com/users/${USER}/repos?per_page=100`, { headers: { 'Accept': 'application/vnd.github+json' } })
+  .then(res => { if (!res.ok) throw new Error('GitHub API error ' + res.status); return res.json(); })
   .then(repos => {
     const tagged = repos.filter(r => (r.topics || []).includes('portfolio'));
     state.data = tagged.filter(r => (r.topics || []).includes('data-analysis'));
@@ -220,7 +582,7 @@ fetch(`https://api.github.com/users/${USER}/repos?per_page=100`, {
   })
   .catch(err => {
     document.getElementById('content').innerHTML =
-      `<p class="state">Couldn't load projects right now (${err.message}). Refresh, or check them directly on <a class="repo-link" href="https://github.com/${USER}" target="_blank" rel="noopener">GitHub</a>.</p>`;
+      `<p class="state">Couldn't load projects right now (${err.message}). See them on <a class="repo-link" style="color:var(--sf)" href="https://github.com/${USER}" target="_blank" rel="noopener">GitHub</a>.</p>`;
   });
 </script>
 </body>
